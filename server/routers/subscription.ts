@@ -1,6 +1,6 @@
 import { protectedProcedure, router } from "../_core/trpc";
 import { z } from "zod";
-import { getSubscriptionByUserId, updateSubscription } from "../db";
+import { getSubscriptionByUserId, updateSubscription } from "../db-sqlite";
 import axios from 'axios';
 
 export const subscriptionRouter = router({

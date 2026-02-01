@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { updateSubscription, getSubscriptionByUserId } from '../db';
+import { updateSubscription, getSubscriptionByUserId } from "../db-sqlite";
 import crypto from 'crypto';
 
 export async function handleAbacateWebhook(req: Request, res: Response) {

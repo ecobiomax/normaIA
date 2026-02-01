@@ -8,7 +8,7 @@ import { documentsRouter } from "./routers/documents";
 import { z } from "zod";
 import bcrypt from "bcryptjs";
 import { nanoid } from "nanoid";
-import * as db from "./db";
+import * as db from "./db-sqlite";
 import { sdk } from "./_core/sdk";
 import { ONE_YEAR_MS } from "@shared/const";
 import {
@@ -114,12 +114,16 @@ export const appRouter = router({
     login: publicProcedure
       .input(z.object({ email: z.string().email(), password: z.string().min(1) }))
       .mutation(async ({ ctx, input }) => {
+        console.log("[DEBUG] Login attempt for email:", input.email);
         const localUser = await getLocalAuthUserByEmail(input.email);
+        console.log("[DEBUG] localUser found:", localUser ? "YES" : "NO");
         if (!localUser) {
           return { success: false, message: "Credenciais inválidas" } as const;
         }
 
+        console.log("[DEBUG] Comparing password...");
         const ok = await bcrypt.compare(input.password, localUser.passwordHash);
+        console.log("[DEBUG] Password match:", ok);
         if (!ok) {
           return { success: false, message: "Credenciais inválidas" } as const;
         }

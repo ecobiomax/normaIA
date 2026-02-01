@@ -3,7 +3,7 @@ import { initTRPC, TRPCError } from "@trpc/server";
 import superjson from "superjson";
 import type { TrpcContext } from "./context";
 import { SUBSCRIPTION_EXPIRED_ERR_MSG } from "@shared/const";
-import { createSubscription, getSubscriptionByUserId, updateSubscription } from "../db";
+import { createSubscription, getSubscriptionByUserId, updateSubscription } from "../db-sqlite";
 
 const t = initTRPC.context<TrpcContext>().create({
   transformer: superjson,

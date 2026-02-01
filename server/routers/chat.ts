@@ -1,6 +1,6 @@
 import { router, subscriberProcedure } from "../_core/trpc";
 import { z } from "zod";
-import { saveChatMessage, getChatHistoryByUserId } from "../db";
+import { saveChatMessage, getChatHistoryByUserId } from "../db-sqlite";
 import { searchSimilarDocuments } from "../_core/embeddings";
 import OpenAI from 'openai';
 
